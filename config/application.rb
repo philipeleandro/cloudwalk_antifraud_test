@@ -31,7 +31,7 @@ module RailsTemplate
     config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
-    #
+    config.api_only = true
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
