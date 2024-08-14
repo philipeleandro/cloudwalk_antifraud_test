@@ -1,22 +1,17 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  host: localhost
-  username: <%= Rails.application.credentials.dig(:postgres, :local, :user) %>
-  password: <%= Rails.application.credentials.dig(:postgres, :local, :password) %>
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: storage/development_postgresql
+  database: storage/development.sqlite3
 
 test:
   <<: *default
   database: storage/test_postgresql
 
 production:
-  adapter: postgresql
   encoding: unicode
   url: <%= ENV['DATABASE_URL'] %>
   pool: 5
