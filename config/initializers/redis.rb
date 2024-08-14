@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 url = ENV["REDIS_URL"]
 
 if url
@@ -7,5 +9,5 @@ if url
   Sidekiq.configure_client do |config|
     config.redis = { url: url }
   end
-  $redis = Redis.new(:url => url)
+  $redis = Redis.new(url: url)
 end
