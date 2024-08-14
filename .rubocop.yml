@@ -1,0 +1,65 @@
+require:
+  - rubocop-factory_bot
+  - rubocop-capybara
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+Bundler/OrderedGems:
+  TreatCommentsAsGroupSeparators: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Lint/SuppressedException:
+  AllowComments: true
+
+Metrics/ClassLength:
+  CountAsOne: ['array', 'hash', 'heredoc']
+
+Metrics/MethodLength:
+  CountAsOne: ['array', 'hash', 'heredoc']
+  Max: 12
+
+Naming/VariableNumber:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+Performance/BlockGivenWithExplicitBlock:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: either
+
+Style/GlobalStdStream:
+  Exclude:
+    - 'config/environments/production.rb'
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/SymbolProc:
+  AllowMethodsWithArguments: true
+
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - app/controllers/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'config/environments/*'
+    - 'config/routes.rb'
+
+Style/BlockComments:
+  Exclude:
+  - 'spec/**/*'
+
