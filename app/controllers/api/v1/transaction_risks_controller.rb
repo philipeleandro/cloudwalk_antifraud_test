@@ -3,10 +3,11 @@
 module Api
   module V1
     class TransactionRisksController < ApplicationController
-      include ResponseHelper
+      include Api::V1::TransactionRiskHelper
 
       def create
-        instance = TransactionRisksManager::Creator.new(transaction_risks_params)
+        parsed_transaction_risks_params = parsed_params(transaction_risks_params)
+        instance = TransactionRisksManager::Creator.new(parsed_transaction_risks_params)
         result = instance.call
 
         if result[:error]
