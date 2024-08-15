@@ -51,7 +51,7 @@ module RiskAnalysisManager
       card_number_transactions = TransactionRisk.where(user_id: args[:user_id]).pluck(:card_number).last(10)
       card_numbers_quantity = card_number_transactions.uniq
 
-      return true if card_numbers_quantity == 5
+      return true if card_numbers_quantity.size >= 5
 
       false
     end
