@@ -9,6 +9,5 @@ FactoryBot.define do
     transaction_date { "2024-08-14 19:50:33" }
     transaction_amount { "9.99" }
     device_id { 1 }
-    has_cbk { false }
   end
 end
