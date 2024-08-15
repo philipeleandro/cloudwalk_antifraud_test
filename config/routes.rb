@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :admins
 
-  get "up" => "rails/health#show", as: :rails_health_check
+  namespace :api do
+    namespace :v1 do
+      resources :transaction_risks, only: [:create]
+    end
+  end
 
   mount Sidekiq::Web => "/sidekiq"
-
-  root to: "home#index"
 end
