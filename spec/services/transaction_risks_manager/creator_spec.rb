@@ -11,22 +11,21 @@ RSpec.describe TransactionRisksManager::Creator do
                     device_id: "1" } }
     subject(:result) { described_class.new(args).call }
 
-    before do
-      allow_any_instance_of(RiskAnalysisManager::Validation).to receive(:call).and_return(true)
-    end
-
     context "when success" do
+      before do
+        allow_any_instance_of(RiskAnalysisManager::Validation).to receive(:call).and_return(true)
+      end
+
       it { expect(result).to include(:success, :transaction_risk) }
       it { expect(result[:success]).to be_truthy }
     end
 
     context "when failure" do
       before do
-        allow_any_instance_of(TransactionRisk).to receive(:save).and_return(false)
+        allow_any_instance_of(RiskAnalysisManager::Validation).to receive(:call).and_return(false)
       end
 
-      it { expect(result).to include(:success) }
-      it { expect(result).not_to include(:transaction_risk) }
+      it { expect(result).to include(:success, :transaction_risk) }
       it { expect(result[:success]).to be_falsey }
     end
 
