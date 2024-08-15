@@ -12,7 +12,7 @@ module Api
         if result[:error]
           render json: parse_response(result), status: :unprocessable_entity
         else
-          render json: parse_response(result), status: :created
+          render json: result[:transaction_risk], status: :created
         end
       end
 
@@ -20,14 +20,7 @@ module Api
 
       def transaction_risks_params
         params.require(:transaction_risk).permit(:transaction_id, :merchant_id, :user_id, :card_number,
-                                                 :transaction_date, :transaction_amount)
-      end
-
-      def serialized_transaction_risk(result)
-        ActiveModelSerializers::SerializableResource.new(
-          result,
-          each_serializer: TransactionRiskSerializer
-        )
+                                                 :transaction_date, :transaction_amount, :device_id)
       end
     end
   end
