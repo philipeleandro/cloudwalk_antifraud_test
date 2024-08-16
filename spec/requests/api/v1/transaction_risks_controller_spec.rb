@@ -28,7 +28,6 @@ RSpec.describe Api::V1::TransactionRisksController, type: :request do
       before do
         allow_any_instance_of(TransactionRisksManager::Creator).to receive(:call).and_return(response_service)
 
-
         post "/api/v1/transaction_risks", params: body.to_json, headers: auth_token_for(user)
       end
 
