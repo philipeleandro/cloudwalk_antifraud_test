@@ -14,13 +14,12 @@ module Api
 
       def create
         parsed_transaction_risks_params = parsed_params(transaction_risks_params)
-        instance = TransactionRisksManager::Creator.new(parsed_transaction_risks_params)
-        result = instance.call
+        result = TransactionRisksManager::Creator.new(parsed_transaction_risks_params).call
 
         if result[:error]
           render json: parse_response(result), status: :unprocessable_entity
         else
-          render json: result[:transaction_risk], status: :created
+          render json: result[:transaction_risk], serializer: Creator::TransactionRiskSerializer, status: :created
         end
       end
 
