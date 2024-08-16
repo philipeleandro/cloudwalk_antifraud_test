@@ -4,7 +4,6 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   devise_for :users
-  devise_for :admins
 
   namespace :api do
     namespace :v1 do
