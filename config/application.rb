@@ -33,7 +33,7 @@ module RailsTemplate
     # Configuration for the application, engines, and railties goes here.
     config.api_only = true
     config.time_zone = "Brasilia"
-    config.autoload_paths += %W(#{config.root}/app/controllers/api/v1/concerns)
+    config.autoload_paths += %W[#{config.root}/app/controllers/api/v1/concerns]
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #

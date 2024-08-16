@@ -9,7 +9,7 @@ module TransactionRisksManager
     end
 
     def call
-      set_recommendation(validate_transaction)
+      recommendation_set(validate_transaction)
       persist_transaction_risk(@transaction_risk)
       response
     rescue StandardError => e
@@ -33,7 +33,7 @@ module TransactionRisksManager
       @transaction_risk ||= TransactionRisk.new(args)
     end
 
-    def set_recommendation(analysis_response)
+    def recommendation_set(analysis_response)
       return transaction_risk.recommendation = "approve" if analysis_response
 
       transaction_risk.recommendation = "deny"

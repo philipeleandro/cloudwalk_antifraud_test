@@ -1,15 +1,22 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe RiskAnalysisManager::Validation do
   describe ".call" do
-    let(:args)  { { transaction_id: "1",
-                    merchant_id: "1",
-                    user_id: "1",
-                    card_number: "Fake Number",
-                    transaction_date: "2024-08-14 19:50:33",
-                    transaction_amount: "9.999",
-                    device_id: "1" } }
-    subject(:result) { RiskAnalysisManager::Validation.new(args).call }
+    subject(:result) { described_class.new(args).call }
+
+    let(:args) do
+      {
+        transaction_id: "1",
+        merchant_id: "1",
+        user_id: "1",
+        card_number: "Fake Number",
+        transaction_date: "2024-08-14 19:50:33",
+        transaction_amount: "9.999",
+        device_id: "1"
+      }
+    end
 
     context "when transaction is rejected" do
       context "when client already has chargeback" do
@@ -20,7 +27,7 @@ RSpec.describe RiskAnalysisManager::Validation do
           new_args[:transaction_amount] = "10.00"
 
           TransactionRisk.create(new_args.merge(has_cbk: true))
-       end
+        end
 
         it { expect(result).to eq(false) }
       end
@@ -43,7 +50,7 @@ RSpec.describe RiskAnalysisManager::Validation do
           args[:transaction_amount] = "1500.00"
         end
 
-        it 'refuses transactions' do
+        it "refuses transactions" do
           stub_const("RiskAnalysisManager::Validation::LIMIT_HOUR", Time.zone.now.hour)
 
           expect(result).to eq(false)
@@ -61,7 +68,7 @@ RSpec.describe RiskAnalysisManager::Validation do
           TransactionRisk.create(new_args.merge(has_cbk: true))
         end
 
-        it 'refuses transactions' do
+        it "refuses transactions" do
           stub_const("RiskAnalysisManager::Validation::CARD_NUMBER_LIMIT", 1)
 
           expect(result).to eq(false)
@@ -71,7 +78,7 @@ RSpec.describe RiskAnalysisManager::Validation do
 
     context "when transaction is approved" do
       before do
-         args[:user_id] = "2"
+        args[:user_id] = "2"
       end
 
       it { expect(result).to eq(true) }

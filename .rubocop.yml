@@ -49,6 +49,12 @@ Style/SymbolProc:
 Rails/RedundantPresenceValidationOnBelongsTo:
   Enabled: false
 
+RSpec/AnyInstance:
+ Enabled: false
+
+RSpec/NestedGroups:
+ Enabled: false
+
 Metrics/AbcSize:
   Exclude:
     - app/controllers/**/*

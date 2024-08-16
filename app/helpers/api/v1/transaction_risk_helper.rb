@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module TransactionRiskHelper
-      TRUE_CONDITION = ["true"]
-
       def parse_response(data)
-        response = {}.tap do |hash|
-                    hash[:transaction_id] = data.dig(:transaction_risk).try(:transaction_id) || data.dig(:args, :transaction_id)
-                    hash[:error] = data[:error]
+        {}.tap do |hash|
+          hash[:transaction_id] = data[:transaction_risk].try(:transaction_id) ||
+                                  data.dig(:args, :transaction_id)
+          hash[:error] = data[:error]
         end
       end
 
@@ -20,11 +21,11 @@ module Api
       private
 
       def parse_transaction_amount(transaction_amount)
-        transaction_amount.strip.gsub(",",".")
+        transaction_amount.strip.tr(",", ".")
       end
 
       def parse_has_cbk(has_cbk)
-        return true if TRUE_CONDITION.include?(has_cbk.try(:downcase))
+        return true if has_cbk.try(:downcase) == "true"
 
         false
       end

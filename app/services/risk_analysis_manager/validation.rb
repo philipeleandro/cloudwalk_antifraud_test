@@ -40,7 +40,8 @@ module RiskAnalysisManager
     end
 
     def exceed_retries?
-      recent_transactions_count = TransactionRisk.where("transaction_date >= ? AND user_id = ?", TIME_WINDOW.ago, args[:user_id]).size
+      recent_transactions_count = TransactionRisk.where("transaction_date >= ? AND user_id = ?", TIME_WINDOW.ago,
+                                                        args[:user_id]).size
 
       return true if recent_transactions_count == MAX_TRANSACTIONS
 
@@ -48,16 +49,17 @@ module RiskAnalysisManager
     end
 
     def many_card_changes?
-      card_number_transactions = TransactionRisk.where(user_id: args[:user_id]).pluck(:card_number).last(10)
+      card_number_transactions = TransactionRisk.where("transaction_date >= ? AND user_id = ?", 1.day.ago,
+                                                       args[:user_id]).pluck(:card_number).last(5)
       card_numbers_quantity = card_number_transactions.uniq
 
-      return true if card_numbers_quantity.size >= 5
+      return true if card_numbers_quantity.size == 5
 
       false
     end
 
-    def parsed_time # rubocop:disable Rails/TimeZone
-      Time.parse(args[:transaction_date])
+    def parsed_time
+      Time.parse(args[:transaction_date]) # rubocop:disable Rails/TimeZone
     end
   end
 end

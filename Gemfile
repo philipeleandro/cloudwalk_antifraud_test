@@ -34,7 +34,7 @@ gem "sidekiq"
 
 gem "devise"
 
-gem 'active_model_serializers', '~> 0.10.0'
+gem "active_model_serializers", "~> 0.10.0"
 
 group :development, :test do
   gem "rspec-rails", "~> 6.1.0"
