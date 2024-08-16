@@ -7,7 +7,6 @@ module RiskAnalysisManager
     LIMIT_VALUE = 1000.00
     LIMIT_HOUR = 22
     MAX_TRANSACTIONS = 5
-    TIME_WINDOW = 1.minute
     CARD_NUMBER_LIMIT = 5
 
     def initialize(args)
@@ -40,8 +39,7 @@ module RiskAnalysisManager
     end
 
     def exceed_retries?
-      recent_transactions_count = TransactionRisk.where("transaction_date >= ? AND user_id = ?", TIME_WINDOW.ago,
-                                                        args[:user_id]).size
+      recent_transactions_count = TransactionRisk.by_date(args[:user_id], 1.minute.ago).size
 
       return true if recent_transactions_count == MAX_TRANSACTIONS
 
@@ -49,8 +47,7 @@ module RiskAnalysisManager
     end
 
     def many_card_changes?
-      card_number_transactions = TransactionRisk.where("transaction_date >= ? AND user_id = ?", 1.day.ago,
-                                                       args[:user_id]).pluck(:card_number).last(5)
+      card_number_transactions = TransactionRisk.by_date(args[:user_id], 1.day.ago).pluck(:card_number).last(5)
       card_numbers_quantity = card_number_transactions.uniq
 
       return true if card_numbers_quantity.size == 5

@@ -5,4 +5,5 @@ class TransactionRisk < ApplicationRecord
             :transaction_amount, presence: true
 
   scope :has_cbk?, ->(user_id) { where(user_id: user_id, has_cbk: true) }
+  scope :by_date, ->(user_id, transaction_date) { where("transaction_date >= ? AND user_id = ?", transaction_date, user_id) }
 end
