@@ -34,6 +34,8 @@ gem "sidekiq"
 
 gem "devise"
 
+gem "devise-api", github: "nejdetkadir/devise-api", branch: "main"
+
 gem "active_model_serializers", "~> 0.10.0"
 
 group :development, :test do
