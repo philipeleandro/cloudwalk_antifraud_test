@@ -16,9 +16,9 @@ RSpec.describe TransactionRisksManager::Finder do
     end
 
     context "when has recommendation param" do
-      let(:args) { { user_id: 1, recommendation: "deny", has_cbk: true } }
+      let(:args) { { user_id: 1, recommendation: TransactionRisk::DENY, has_cbk: true } }
 
-      before { TransactionRisk.last.update(recommendation: "deny") }
+      before { TransactionRisk.last.update(recommendation: TransactionRisk::DENY) }
 
       it { expect(result.size).to eq(1) }
     end

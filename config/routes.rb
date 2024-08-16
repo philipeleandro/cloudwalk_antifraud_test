@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :transaction_risks, only: [:create]
+      resources :transaction_risks, only: %i[create index]
     end
   end
 

@@ -5,6 +5,13 @@ module Api
     class TransactionRisksController < ApplicationController
       include Api::V1::TransactionRiskHelper
 
+      def index
+        params_list = params.require(:transaction_risk).permit(:user_id, :recommendation, :has_cbk)
+        result = TransactionRisksManager::Finder.new(params_list).call
+
+        render json: result, each_serializer: Finder::TransactionRiskSerializer, status: :ok
+      end
+
       def create
         parsed_transaction_risks_params = parsed_params(transaction_risks_params)
         instance = TransactionRisksManager::Creator.new(parsed_transaction_risks_params)
