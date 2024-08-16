@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_16_215120) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_16_230819) do
   create_table "devise_api_tokens", force: :cascade do |t|
     t.string "resource_owner_type", null: false
     t.bigint "resource_owner_id", null: false
@@ -39,6 +39,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_16_215120) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "recommendation"
+    t.index ["has_cbk"], name: "index_transaction_risks_on_has_cbk"
+    t.index ["recommendation"], name: "index_transaction_risks_on_recommendation"
+    t.index ["user_id", "has_cbk"], name: "index_transaction_risks_on_user_id_and_has_cbk"
+    t.index ["user_id", "transaction_date"], name: "index_transaction_risks_on_user_id_and_transaction_date"
+    t.index ["user_id"], name: "index_transaction_risks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
