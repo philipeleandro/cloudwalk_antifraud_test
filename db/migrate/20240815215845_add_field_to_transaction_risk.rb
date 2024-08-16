@@ -2,6 +2,6 @@
 
 class AddFieldToTransactionRisk < ActiveRecord::Migration[7.1]
   def change
-    add_column :transaction_risks, :recommendation, :string
+    rename_column :transaction_risks, :recomendation, :recommendation
   end
 end

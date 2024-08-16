@@ -34,7 +34,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_215845) do
     t.boolean "has_cbk", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "recomendation"
     t.string "recommendation"
   end
 

@@ -36,7 +36,7 @@ module TransactionRisksManager
     def recommendation_set(analysis_response)
       return transaction_risk.recommendation = "approve" if analysis_response
 
-      transaction_risk.recommendation = "deny"
+      transaction_risk.recommendation = TransactionRisk::DENY
     end
 
     def persist_transaction_risk(transaction_risk)

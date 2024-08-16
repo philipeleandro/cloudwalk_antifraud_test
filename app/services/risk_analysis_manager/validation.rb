@@ -33,7 +33,7 @@ module RiskAnalysisManager
     end
 
     def exceed_limit_value_transaction?
-      return true if parsed_time.hour == LIMIT_HOUR && args[:transaction_amount].to_d > LIMIT_VALUE
+      return true if parsed_time.hour >= LIMIT_HOUR && args[:transaction_amount].to_d > LIMIT_VALUE
 
       false
     end
@@ -41,18 +41,23 @@ module RiskAnalysisManager
     def exceed_retries?
       recent_transactions_count = TransactionRisk.by_date(args[:user_id], 1.minute.ago).size
 
-      return true if recent_transactions_count == MAX_TRANSACTIONS
+      return true if recent_transactions_count >= MAX_TRANSACTIONS
 
       false
     end
 
     def many_card_changes?
-      card_number_transactions = TransactionRisk.by_date(args[:user_id], 1.day.ago).pluck(:card_number).last(5)
-      card_numbers_quantity = card_number_transactions.uniq
+      card_number_transactions = TransactionRisk.by_date(args[:user_id], 1.day.ago).last(5)
+      verify_transactions = all_deny?(card_number_transactions)
+      last_card_numbers = card_number_transactions.pluck(:card_number).uniq
 
-      return true if card_numbers_quantity.size == 5
+      return true if last_card_numbers.size == 5 && verify_transactions
 
       false
+    end
+
+    def all_deny?(transaction_risks)
+      transaction_risks.all? { |transaction_risk| transaction_risk.recommendation == TransactionRisk::DENY }
     end
 
     def parsed_time
