@@ -9,7 +9,8 @@
 ### 3. Solve the problem
 *Stop credit card fraud: Implement the concept of a simple anti-fraud.*
 
-#### requirements
+#### Requirements
+You must have install these following items to the application runs well:
 - docker
 - docker-compose
 
