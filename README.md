@@ -1,24 +1,8 @@
-# README
+# Cloudwalk Antifraud Test
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Tasks
+### 1.
+- The responses to questions made to understand the industry can be found here. [Click to read responses]()
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Doc API
+[Click here to check!](https://github.com/philipeleandro/cloudwalk_antifraud_test/blob/main/APIDOC.md)
