@@ -14,7 +14,7 @@ This application has the function of indicate some recommendation to approve or 
   - If an user (which is owner of the id sent in user_id param) has in transactions history a transaction with `has_cbk` attribute setted with `true`.
   - If an user tries a transaction after 10pm with a `transaction_amount` greater than `1000.00`.
   - If the in last minute, an user has more than 5 tries to transact, the next one will be denied.
-  - If on one day, the user has at least 5 transaction with 5 different `card_numbers`, the next ones will be denied.
+  - If in one day, the user has at least 5 transaction with 5 different `card_numbers`, the next ones will be denied.
 
 #### Requirements
 You must have install these following items to the application runs well:
