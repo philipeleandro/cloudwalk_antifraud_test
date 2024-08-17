@@ -2,7 +2,7 @@
 
 ## Doc API
 In swagger you can find some details about the api routes:
-[Click here to check!](https://localhost:3000/api/v1/api-docs)
+[Click here to check!](http://localhost:3000/api-docs)
 
 But if you curious and want some spoiler, here it is:
 
@@ -68,31 +68,31 @@ Headers:
 Authorization: Bearer "token"
 ```
 
-Example:
+Here some examples of how you can build your URL to send some attribute filter and after get a response:
 
 Filter by user_id:
 ```
-https://www.example.com/api/v1/transaction_risks?user_id=1
+http://localhost:3000/api/v1/transaction_risks?user_id=1
 ```
 
 Filter by recommendation:
 ```
-https://www.example.com/api/v1/transaction_risks?recommendation=approve or https://www.example.com/api/v1/transaction_risks?recommendation=deny
+http://localhost:3000/api/v1/transaction_risks?recommendation=approve or http://localhost:3000/api/v1/transaction_risks?recommendation=deny
 ```
 
 Filter by has_cbk:
 ```
-https://www.example.com/api/v1/transaction_risks?has_cbk=true or https://www.example.com/api/v1/transaction_risks?has_cbk=false
+http://localhost:3000/api/v1/transaction_risks?has_cbk=true or http://localhost:3000/api/v1/transaction_risks?has_cbk=false
 ```
 
 or you can use more than one filter together
 ```
-https://www.example.com/api/v1/transaction_risks?has_cbk=true&recommendation=approve&user_id=1
+http://localhost:3000/api/v1/transaction_risks?has_cbk=true&recommendation=approve&user_id=1
 ```
 
 But if you want to list all data, use:
 ```
-https://www.example.com/api/v1/transaction_risks
+http://localhost:3000/api/v1/transaction_risks
 ```
 
 Response body:
