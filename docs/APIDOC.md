@@ -7,7 +7,7 @@ In swagger you can find some details about the api routes:
 But if you curious and want some spoiler, here it is:
 
 ### POST /users/tokens/sign_in
-Use this endpoint to generate authorization to you use other endpoints
+Use this endpoint to generate token authorization to you use other endpoints
 
 Request body
 ```
