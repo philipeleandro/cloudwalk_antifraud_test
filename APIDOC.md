@@ -2,7 +2,7 @@
 
 ## Doc API
 In swagger you can find some details about the api routes:
-[Click here to check!](https://localhost:3000/api/v1/api-docs)
+[Click here to check!](https://localhost:3000/api-docs)
 
 But if you curious and want some spoiler, here it is:
 
