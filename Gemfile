@@ -38,6 +38,10 @@ gem "devise-api", github: "nejdetkadir/devise-api", branch: "main"
 
 gem "active_model_serializers", "~> 0.10.0"
 
+gem "rswag-api"
+
+gem "rswag-ui"
+
 group :development, :test do
   gem "rspec-rails", "~> 6.1.0"
 
@@ -54,6 +58,8 @@ group :development, :test do
   gem "rubocop-rspec", "2.23.2"
 
   gem "factory_bot_rails"
+
+  gem "rswag-specs"
 end
 
 group :development do

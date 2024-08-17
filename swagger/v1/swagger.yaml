@@ -1,0 +1,98 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/transaction_risks":
+    post:
+      summary: Creates a transaction risk
+      tags:
+      - Transaction Risks
+      parameters: []
+      responses:
+        '201':
+          description: transaction risk created
+        '422':
+          description: unprocessable entity
+        '401':
+          description: invalid token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string
+                merchant_id:
+                  type: string
+                user_id:
+                  type: string
+                card_number:
+                  type: string
+                transaction_date:
+                  type: string
+                  format: datetime
+                transaction_amount:
+                  type: string
+                device_id:
+                  type: string
+              required:
+              - transaction_id
+              - merchant_id
+              - user_id
+              - transaction_date
+              - transaction_amount
+      response_body:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string
+                merchant_id:
+                  type: string
+                user_id:
+                  type: string
+                card_number:
+                  type: string
+                transaction_date:
+                  type: string
+                  format: datetime
+                transaction_amount:
+                  type: string
+                device_id:
+                  type: string
+    get:
+      summary: Retrieves transaction risks
+      tags:
+      - Transaction Risks
+      parameters:
+      - name: has_cbk
+        in: query
+        required: false
+        description: Has chargeback
+        schema:
+          type: boolean
+      - name: recommendation
+        in: query
+        required: false
+        description: Recommendation for the transaction risk
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        required: false
+        description: User ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: filtered transaction risks retrieved
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
