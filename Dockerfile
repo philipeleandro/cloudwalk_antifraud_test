@@ -1,45 +1,49 @@
-ARG RUBY_VERSION=3.2.2
+# Stage 1: Build
+FROM ruby:3.2.2 AS build
 
-FROM ruby:${RUBY_VERSION}-slim as base
+# Install dependencies
+RUN apt-get update -qq && apt-get install -y \
+  build-essential \
+  sqlite3 \
+  nodejs \
+  && rm -rf /var/lib/apt/lists/*
 
-# Rails app lives here
+# Set up the working directory
 WORKDIR /app
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
+# Install bundler
+RUN gem install bundler
 
-# Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config
-
-# Install application gems
+# Copy the Gemfile and Gemfile.lock
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
 
-# Copy application code
+# Install gems
+RUN bundle install
+
+# Copy the application code
 COPY . .
 
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+# Precompile assets (not needed for API-only apps, but included here if you have any assets)
+# RUN bundle exec rake assets:precompile
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# Stage 2: Run
+FROM ruby:3.2.2
 
+# Install dependencies
+RUN apt-get update -qq && apt-get install -y \
+  sqlite3 \
+  nodejs \
+  && rm -rf /var/lib/apt/lists/*
 
-# Final stage for app image
-FROM base
+# Set up the working directory
+WORKDIR /app
 
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Copy built artifacts: gems, application
+# Copy the gems and application code from the build stage
 COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
+COPY --from=build /app /app
 
-# Start the server by default, this can be overwritten at runtime
+# Expose the port that the Rails server will run on
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+
+# Start the Rails server by default
+CMD ["rails", "server", "-b", "0.0.0.0"]
