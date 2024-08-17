@@ -10,7 +10,7 @@
 *Stop credit card fraud: Implement the concept of a simple anti-fraud.*
 
 #### Application
-This application has the function of indicate some recommendation to approve or deny a transaction based on some rules that will analyze the attributes sent on request body. The rules that are considered to deny a transaction is:
+This application has the function of indicate some recommendation to approve or deny a transaction based on some rules that will analyze the attributes sent on request body. The rules considered to deny a transaction is:
   - If an user (which is owner of the id sent in user_id param) has in transactions history a transaction with `has_cbk` attribute setted with `true`.
   - If an user tries a transaction after 10pm with a `transaction_amount` greater than `1000.00`.
   - If the in last minute, an user has more than 5 tries to transact, the next one will be denied.
