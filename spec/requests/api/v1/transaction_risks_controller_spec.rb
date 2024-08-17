@@ -69,11 +69,7 @@ RSpec.describe Api::V1::TransactionRisksController, type: :request do
   end
 
   describe "GET /api/v1/transaction_risks" do
-    let(:params) do
-      { transaction_risk: { user_id: "1",
-                            has_cbk: "true",
-                            recommendation: "approve" } }
-    end
+    let(:params) { { user_id: "1", has_cbk: "true", recommendation: "approve" } }
     let(:transaction_risks) { create_list(:transaction_risk, 3, has_cbk: true, recommendation: "approve") }
 
     before do
@@ -87,7 +83,7 @@ RSpec.describe Api::V1::TransactionRisksController, type: :request do
     end
 
     context "when filter only one params" do
-      let(:params) { { transaction_risk: { user_id: "2" } } }
+      let(:params) { { user_id: "2" } }
 
       before do
         TransactionRisk.last.update(user_id: 2)

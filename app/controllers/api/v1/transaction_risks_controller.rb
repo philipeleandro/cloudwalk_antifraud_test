@@ -8,7 +8,7 @@ module Api
       before_action :authenticate_devise_api_token!
 
       def index
-        params_list = params.require(:transaction_risk).permit(:user_id, :recommendation, :has_cbk)
+        params_list = params.permit(:user_id, :recommendation, :has_cbk)
         result = TransactionRisksManager::Finder.new(params_list).call
 
         render json: result, each_serializer: Finder::TransactionRiskSerializer, status: :ok

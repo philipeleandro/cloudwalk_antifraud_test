@@ -21,7 +21,7 @@ module TransactionRisksManager
     end
 
     def scope
-      TransactionRisk.where(user_id: params[:user_id])
+      params.key?(:user_id) ? TransactionRisk.where(user_id: params[:user_id]) : TransactionRisk.all
     end
 
     def apply_has_cbk_filter(query)
