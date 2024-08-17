@@ -30,7 +30,7 @@ You can start the application by running the following steps in your terminal:
 
 After running this commands, you will see in your terminal messages to database creation, run migrations, seed and server up, then the application will be ready to use.
 
-The seed creates an user that you can use in the next steps to authorization (Don't consider " to email and password):
+The seeds file creates an user that you can use in the next steps to authorization (Don't consider " to email and password):
 ```
 email: "cloudwalk_test@test.com"
 password: "password"
