@@ -21,7 +21,7 @@ module Api
       private
 
       def parse_transaction_amount(transaction_amount)
-        transaction_amount.strip.tr(",", ".")
+        transaction_amount.strip.tr(",", ".") if transaction_amount.is_a?(String)
       end
 
       def parse_has_cbk(has_cbk)
