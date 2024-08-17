@@ -1,12 +1,14 @@
-require 'factory_bot'
+# frozen_string_literal: true
+
+require "factory_bot"
 
 # Create User
-puts "Creating User to manager app"
+Rails.logger.debug "Creating User to manager app"
 User.create!(email: "cloudwalk_test@test.com", password: "password")
-puts "User created"
-puts "-------------------------------------------------------------"
+Rails.logger.debug "User created"
+Rails.logger.debug "-------------------------------------------------------------"
 
-puts "Creating approve transaction data"
+Rails.logger.debug "Creating approve transaction data"
 # Create TransactionRisk data
 args = { transaction_id: "21320398",
          merchant_id: "29744",
@@ -16,22 +18,22 @@ args = { transaction_id: "21320398",
          transaction_amount: "374.56",
          device_id: "285475",
          has_cbk: false,
-         recommendation: "approve"}
+         recommendation: "approve" }
 
 FactoryBot.create_list(:transaction_risk, 2, args)
-puts "TransactionRisk create"
-puts "-------------------------------------------------------------"
+Rails.logger.debug "TransactionRisk create"
+Rails.logger.debug "-------------------------------------------------------------"
 
-puts "Creating deny transaction data"
+Rails.logger.debug "Creating deny transaction data"
 args = { transaction_id: "21320399",
-  merchant_id: "92895",
-  user_id: "2708",
-  card_number: "444456******4210",
-  transaction_date: "2019-12-01T22:45:37.873639",
-  transaction_amount: "734.87",
-  device_id: "497105",
-  has_cbk: true,
-  recommendation: "deny"}
+         merchant_id: "92895",
+         user_id: "2708",
+         card_number: "444456******4210",
+         transaction_date: "2019-12-01T22:45:37.873639",
+         transaction_amount: "734.87",
+         device_id: "497105",
+         has_cbk: true,
+         recommendation: "deny" }
 
 FactoryBot.create_list(:transaction_risk, 2, args)
-puts "TransactionRisk create"
+Rails.logger.debug "TransactionRisk create"
