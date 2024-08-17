@@ -6,6 +6,11 @@ In swagger you can find some details about the api routes:
 
 But if you curious and want some spoiler, here it is:
 
+obs.: All endpoints must be used with `http://localhost:3000`. Examples:
+- `POST http://localhost:3000/users/tokens/sign_in`
+- `POST http://localhost:3000/api/v1/transaction_risks`
+- `GET http://localhost:3000/api/v1/transaction_risks`
+
 ### POST /users/tokens/sign_in
 Use this endpoint to generate token authorization to you use other endpoints
 
@@ -39,7 +44,7 @@ Headers:
 Authorization: Bearer "token"
 ```
 
-Request boby:
+Request body:
 ```
 {
   "transaction_id": "string",
@@ -61,7 +66,7 @@ Response:
 ```
 
 ### GET /api/v1/transaction_risks
-You can add user_id, recommendation and has_cbk params to filter the transactions_risk which belongs a user or that check recommendation and if has cbk:
+You can add user_id, recommendation and has_cbk params to filter the transactions_risk which belongs to a user or that check recommendation and if has cbk:
 
 Headers:
 ```
@@ -77,12 +82,16 @@ http://localhost:3000/api/v1/transaction_risks?user_id=1
 
 Filter by recommendation:
 ```
-http://localhost:3000/api/v1/transaction_risks?recommendation=approve or http://localhost:3000/api/v1/transaction_risks?recommendation=deny
+http://localhost:3000/api/v1/transaction_risks?recommendation=approve
+or
+http://localhost:3000/api/v1/transaction_risks?recommendation=deny
 ```
 
 Filter by has_cbk:
 ```
-http://localhost:3000/api/v1/transaction_risks?has_cbk=true or http://localhost:3000/api/v1/transaction_risks?has_cbk=false
+http://localhost:3000/api/v1/transaction_risks?has_cbk=true
+or
+http://localhost:3000/api/v1/transaction_risks?has_cbk=false
 ```
 
 or you can use more than one filter together
