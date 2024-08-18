@@ -5,6 +5,7 @@
 - The responses to the questions made to understand the industry can be found here. [Click to read responses](https://github.com/philipeleandro/cloudwalk_antifraud_test/blob/main/docs/QUESTIONS.md)
 
 ### 2. Get your hands dirty
+The analyze made about transactions data can be found here. [Click to read analyze](https://github.com/philipeleandro/cloudwalk_antifraud_test/blob/main/docs/DATA_ANALYZE.md)
 
 ### 3. Solve the problem
 *Stop credit card fraud: Implement the concept of a simple anti-fraud.*
